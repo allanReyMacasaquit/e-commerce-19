@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button';
+import { UserButton } from '@clerk/nextjs';
 
 function Homepage() {
 	return (
 		<div className='bg-brand-dark'>
-			ADMIN DASHBOARD <Button className='btn-default'> Submit</Button>
+			<UserButton afterSwitchSessionUrl='/' />
 		</div>
 	);
 }
