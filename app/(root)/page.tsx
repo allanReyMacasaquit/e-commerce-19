@@ -1,10 +1,20 @@
-import { Button } from '@/components/ui/button';
+'use client';
+
+import Modal from '@/components/modals/Modal';
 import { UserButton } from '@clerk/nextjs';
 
 function Homepage() {
 	return (
 		<div className='bg-brand-dark'>
-			<UserButton afterSwitchSessionUrl='/' />
+			<Modal
+				isOpen
+				onClose={() => {}}
+				title='test'
+				description='test description'
+			>
+				children
+			</Modal>
+			hello
 		</div>
 	);
 }
