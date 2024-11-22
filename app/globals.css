@@ -93,3 +93,6 @@ body,
 .auth-center {
 	@apply flex items-center justify-center h-full;
 }
+.p-brand {
+	@apply p-4;
+}

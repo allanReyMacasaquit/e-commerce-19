@@ -1,21 +1,18 @@
 'use client';
+import { useEffect } from 'react';
 
 import Modal from '@/components/modals/Modal';
-import { UserButton } from '@clerk/nextjs';
+import { useStoreModal } from '@/hooks/use-store-modal';
 
 function Homepage() {
-	return (
-		<div className='bg-brand-dark'>
-			<Modal
-				isOpen
-				onClose={() => {}}
-				title='test'
-				description='test description'
-			>
-				children
-			</Modal>
-			hello
-		</div>
-	);
+	const { isOpen, onOpen } = useStoreModal();
+
+	useEffect(() => {
+		if (!isOpen) {
+			onOpen();
+		}
+	}, [isOpen, onOpen]);
+
+	return <div className='bg-brand-dark p-brand'>Root Page</div>;
 }
 export default Homepage;
