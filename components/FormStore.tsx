@@ -13,11 +13,15 @@ import { Input } from '@/components/ui/input';
 import { useStoreModal } from '@/hooks/use-store-modal';
 import { formSchema } from '@/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import axios from 'axios';
+
 const FormStore = () => {
 	const { isOpen, onClose } = useStoreModal();
+	const [isLoading, setIsLoading] = useState(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -25,10 +29,16 @@ const FormStore = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		console.log(values);
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		try {
+			setIsLoading(true);
+			const response = await axios.post('/api/stores/', values);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
 	}
 	return (
 		<div className='form-container'>
@@ -42,6 +52,7 @@ const FormStore = () => {
 								<FormLabel>Name</FormLabel>
 								<FormControl>
 									<Input
+										disabled={isLoading}
 										className='form-input'
 										placeholder='Content Management System'
 										{...field}
@@ -53,10 +64,12 @@ const FormStore = () => {
 						)}
 					/>
 					<div className='btn-group'>
-						<Button variant='outline' onClick={onClose}>
+						<Button disabled={isLoading} variant='outline' onClick={onClose}>
 							Cancel
 						</Button>
-						<Button type='submit'>Submit</Button>
+						<Button disabled={isLoading} type='submit'>
+							Submit
+						</Button>
 					</div>
 				</form>
 			</Form>
