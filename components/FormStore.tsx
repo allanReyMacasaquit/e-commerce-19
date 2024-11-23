@@ -18,6 +18,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { NextResponse } from 'next/server';
+import { Loader } from 'lucide-react';
 
 const FormStore = () => {
 	const { isOpen, onClose } = useStoreModal();
@@ -33,9 +36,10 @@ const FormStore = () => {
 		try {
 			setIsLoading(true);
 			const response = await axios.post('/api/stores/', values);
-			console.log(response.data);
+			toast.success('Store created successfully!');
+			form.reset();
 		} catch (error) {
-			console.log(error);
+			toast.error('Failed to create the store. Please try again.');
 		} finally {
 			setIsLoading(false);
 		}
@@ -68,7 +72,7 @@ const FormStore = () => {
 							Cancel
 						</Button>
 						<Button disabled={isLoading} type='submit'>
-							Submit
+							{isLoading ? <Loader /> : 'Submit'}
 						</Button>
 					</div>
 				</form>
