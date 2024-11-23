@@ -89,10 +89,21 @@ body,
 		@apply bg-background text-foreground;
 	}
 }
-
+/* Auth clerk */
 .auth-center {
 	@apply flex items-center justify-center h-full;
 }
 .p-brand {
 	@apply p-4;
+}
+
+/* Form store */
+.form-container {
+	@apply py-4;
+}
+.form-input {
+	@apply p-2 rounded-lg;
+}
+.btn-group {
+	@apply pt-4 space-x-4 flex items-center justify-end;
 }

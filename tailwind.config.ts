@@ -143,8 +143,7 @@ export default {
 					borderRadius: '0.375rem',
 					fontWeight: '600',
 					'&:hover': {
-						backgroundColor: '#3489e4', // Filled custom blue background on hover
-						color: '#FFFFFF', // White text
+						backgroundColor: '#f2f2f2', // Filled custom blue background on hover
 					},
 				},
 				'.btn-secondary': {

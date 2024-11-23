@@ -1,17 +1,19 @@
 import { useStoreModal } from '@/hooks/use-store-modal';
 
 import Modal from './Modal';
+import FormStore from '../FormStore';
 
 const StoreModal = () => {
-	const storeModal = useStoreModal();
+	const { isOpen, onClose } = useStoreModal();
+
 	return (
 		<Modal
 			title='Create Store'
 			description='Add new store to manage products and categories'
-			isOpen={storeModal.isOpen}
-			onClose={storeModal.onClose}
+			isOpen={isOpen}
+			onClose={onClose}
 		>
-			Create store form
+			<FormStore />
 		</Modal>
 	);
 };
